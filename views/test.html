@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="public/assets/css/style.css" type="text/css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<title>Burger Time</title>
+	</head>
+<body>
+<div class ="container">
+	<div class="page-header">
+	  <h1>It's Burger time!<small></small></h1>
+	</div>
+
+	<h3>List of Burgers:</h3>
+
+	<ul>
+	  {{#each burgers}}
+	    {{#unless this.devoured}}
+	      <li>
+	        
+			<div class="well well-sm">{{this.burger_name}}</div>
+	        <form action="/{{this.id}}?_method=PUT" method="POST">
+	          <input type="hidden" name="devoured" value="true">
+	          <button type="submit">Eat</button>
+	        </form>
+
+	       
+	      </li>
+	    {{/unless}}
+	  {{/each}}
+	</ul>
+
+	<h3>list of Devoured Burgers:</h3>
+
+	<ul>
+	  {{#each burgers}}
+	    {{#if this.devoured}}
+	      <li>
+	      	<div class="well well-sm">{{this.burger_name}}</div>
+	        
+
+	        <form action="/{{this.id}}?_method=PUT" method="POST">
+	          <input type="hidden" name="devoured" value="false">
+	          <button type="submit">replenish</button>
+	        </form>
+
+	       
+	      </li>
+	    {{/if}}
+	  {{/each}}
+	</ul>
+
+	<h3>Add a burger</h3>
+	<form class="create-update-form" action="/" method="POST">
+
+	  <div class="form-group">
+	    <label for="ca">Burger:</label>
+	    <input type="text" id="ca" name="name">
+	  </div>
+
+	  <div class="form-group">
+	    <label for="slee">devoured?</label><br>
+	    <input type="radio" name="devoured" value="1" checked> its been eaten<br>
+	    <input type="radio" name="devoured" value="0"> still intact
+	  </div>
+
+	  <button type="submit">Add burger</button>
+	</form>
+	</div>
+</body>
+</html>

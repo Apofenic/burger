@@ -1,0 +1,61 @@
+<div class ="container">
+  <div class="page-header">
+    <h1>It's Burger time!<small></small></h1>
+  </div>
+
+  <h3>List of Burgers:</h3>
+
+  <ul>
+    {{#each burgers}}
+      {{#unless this.devoured}}
+        <li>
+          
+      <div class="well well-sm">{{this.burger_name}}</div>
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="true">
+            <button type="submit">Eat</button>
+          </form>
+
+         
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+
+  <h3>list of Devoured Burgers:</h3>
+
+  <ul>
+    {{#each burgers}}
+      {{#if this.devoured}}
+        <li>
+          <div class="well well-sm">{{this.burger_name}}</div>
+          
+
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="false">
+            <button type="submit">replenish</button>
+          </form>
+
+         
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+
+  <h3>Add a burger</h3>
+  <form class="create-update-form" action="/" method="POST">
+
+    <div class="form-group">
+      <label for="ca">Burger:</label>
+      <input type="text" id="ca" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="slee">devoured?</label><br>
+      <input type="radio" name="devoured" value="1" checked> its been eaten<br>
+      <input type="radio" name="devoured" value="0"> still intact
+    </div>
+
+    <button type="submit">Add burger</button>
+  </form>
+  </div>
